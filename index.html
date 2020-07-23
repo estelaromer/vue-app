@@ -25,7 +25,11 @@
             </nav>
 
             <div class="data-content">
-                <button v-on:click="displayUsers = !displayUsers">Display Users!</button>
+                <div class="add-user-input">
+                    <input type="text" v-model="newUser" placeholder="Enter new user..."></input>
+                    <input type="submit" value="Add User" v-on:click="addNewUser(newUser)"></input>
+                </div>
+                <button v-on:click="changeDisplay">Display Users!</button>
                 <h2>List of Users:</h2>
                 <br>
                 <div v-if="!displayUsers">
@@ -59,7 +63,21 @@
                     'Garfield',
                 ],
                 displayUsers: false,
+                newUser: '',
             },
+            methods: {
+                changeDisplay() {
+                    this.displayUsers = !this.displayUsers;
+                },
+                addNewUser(newUserInput) {
+                    if (newUserInput !== '') {
+                        // Add the user to the local array of users
+                        this.users.push(newUserInput);
+                        // Clear the value of the new user's name
+                        this.newUser = '';
+                    }
+                },
+            }
         });
     </script>
 </body>
