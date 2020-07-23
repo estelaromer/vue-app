@@ -25,11 +25,6 @@
             </nav>
 
             <div class="data-content">
-                <div class="add-user-input">
-                    <input type="text" v-model="newUser" placeholder="Enter new user..."></input>
-                    <input type="submit" value="Add User" v-on:click="addNewUser(newUser)"></input>
-                </div>
-                <button v-on:click="changeDisplay">Display Users!</button>
                 <h2>List of Users:</h2>
                 <br>
                 <div v-if="!displayUsers">
@@ -40,6 +35,23 @@
                       <li>{{ index }}: {{ user }}</li>
                   </ul>
                 </div>
+                <br>
+                <h4>{{ numberOfUsersText }}</h4>
+                <div class="add-user-input">
+                    <input type="text" v-model="newUser" placeholder="Enter new user..."></input>
+                    <input type="submit" value="Add User" v-on:click="addNewUser(newUser)"></input>
+                </div>
+            </div>
+
+            <div class="search-content">
+                <h1>Search Users:</h1>
+                <br>
+                <label for="searchInput">Search for:</label>
+                <input v-model="searchName" id="searchInput" type="text"></input>
+                <br>
+                <ul v-for="user in searchResults">
+                    <li>{{ user }}</li>
+                </ul>
             </div>
 
             <footer class="footer">
@@ -62,8 +74,9 @@
                     'Sara',
                     'Garfield',
                 ],
-                displayUsers: false,
+                displayUsers: true,
                 newUser: '',
+                searchName: '',
             },
             methods: {
                 changeDisplay() {
@@ -77,7 +90,19 @@
                         this.newUser = '';
                     }
                 },
-            }
+            },
+            computed: {
+                numberOfUsersText() {
+                    return 'There are ' + this.users.length + ' users.';
+                },
+                searchResults() {
+                    if (this.searchName != '') {
+                        return this.users.filter(el => el.match(this.searchName))
+                    } else {
+                        return '';
+                    }
+                },
+            },
         });
     </script>
 </body>
