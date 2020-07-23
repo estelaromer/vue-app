@@ -94,7 +94,7 @@
   }
   
   .data-content ul {
-    list-style-position: inside;
+    list-style: none;
   }
   
   .data-content button {
