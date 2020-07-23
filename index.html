@@ -1,0 +1,60 @@
+<head>
+    <title>Vue CRUD Course</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Local CSS file for styling the application-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Vue.js 2 development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue_app">
+        <div class="grid-container">
+            <header class="header-title">
+                <h1>{{ navTitle }}</h1>
+            </header>
+
+            <nav class="navigation-links">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
+
+            <div class="data-content">
+                <button v-on:click.once="displayUsers = !displayUsers">Display Users!</button>
+                <h2>List of Users:</h2>
+                <br>
+                <ul v-show="displayUsers" v-for="(user, index) in users">
+                    <li>{{ index }} : {{ user }}</li>
+                </ul>
+            </div>
+
+            <footer class="footer">
+                <h4>{{ footerMessage }}</h4>
+            </footer>
+        </div>
+    </div>
+
+    <!-- VueJS Code -->
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#vue_app',
+            data: {
+                navTitle: 'Vue Course',
+                footerMessage: 'testdriven.io (2019)',
+                users: [
+                    'user1',
+                    'employee17',
+                    'Bob',
+                    'Sara',
+                    'Garfield',
+                ],
+                displayUsers: false,
+            },
+        });
+    </script>
+</body>
