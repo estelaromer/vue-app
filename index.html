@@ -32,7 +32,7 @@
                 </div>
                 <div v-else>
                   <ul v-for="(user, index) in users">
-                      <li>{{ index }}: {{ user }}</li>
+                      <li v-bind:style="{ color: usersTextColor[index] }">{{ index }}: {{ user }}</li>
                   </ul>
                 </div>
                 <br>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="search-content">
-                <h1>Search Users:</h1>
+                <h1 v-bind:class="searchTextClass">Search Users:</h1>
                 <br>
                 <label for="searchInput">Search for:</label>
                 <input v-model="searchName" id="searchInput" type="text"></input>
@@ -77,6 +77,13 @@
                 displayUsers: true,
                 newUser: '',
                 searchName: '',
+                usersTextColor: [
+                    'white',
+                    'white',
+                    'white',
+                    'white',
+                    'white',
+                ],
             },
             methods: {
                 changeDisplay() {
@@ -88,6 +95,11 @@
                         this.users.push(newUserInput);
                         // Clear the value of the new user's name
                         this.newUser = '';
+                        // Add the styling for the new user to highlight the new user only
+                        for (var i = 0; i < this.usersTextColor.length; i++) {
+                            this.usersTextColor[i] = 'white';
+                        }
+                        this.usersTextColor.push('darkgreen');
                     }
                 },
             },
@@ -100,6 +112,13 @@
                         return this.users.filter(el => el.match(this.searchName))
                     } else {
                         return '';
+                    }
+                },
+                searchTextClass() {
+                    if (this.searchName != '') {
+                    return 'searchTitleBold';
+                    } else {
+                    return 'searchTitleNormal';
                     }
                 },
             },
