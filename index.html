@@ -12,9 +12,7 @@
 <body>
     <div id="vue_app">
         <div class="grid-container">
-            <header class="header-title">
-                <h1>{{ navTitle }}</h1>
-            </header>
+            <app-header class="header-title"></app-header>
 
             <nav class="navigation-links">
                 <ul>
@@ -54,74 +52,10 @@
                 </ul>
             </div>
 
-            <footer class="footer">
-                <h4>{{ footerMessage }}</h4>
-            </footer>
+            <app-footer class="footer"></app-footer>
         </div>
     </div>
 
-    <!-- VueJS Code -->
-    <script type="text/javascript">
-        var vm = new Vue({
-            el: '#vue_app',
-            data: {
-                navTitle: 'Vue Course',
-                footerMessage: 'testdriven.io (2019)',
-                users: [
-                    'user1',
-                    'employee17',
-                    'Bob',
-                    'Sara',
-                    'Garfield',
-                ],
-                displayUsers: true,
-                newUser: '',
-                searchName: '',
-                usersTextColor: [
-                    'white',
-                    'white',
-                    'white',
-                    'white',
-                    'white',
-                ],
-            },
-            methods: {
-                changeDisplay() {
-                    this.displayUsers = !this.displayUsers;
-                },
-                addNewUser(newUserInput) {
-                    if (newUserInput !== '') {
-                        // Add the user to the local array of users
-                        this.users.push(newUserInput);
-                        // Clear the value of the new user's name
-                        this.newUser = '';
-                        // Add the styling for the new user to highlight the new user only
-                        for (var i = 0; i < this.usersTextColor.length; i++) {
-                            this.usersTextColor[i] = 'white';
-                        }
-                        this.usersTextColor.push('darkgreen');
-                    }
-                },
-            },
-            computed: {
-                numberOfUsersText() {
-                    return 'There are ' + this.users.length + ' users.';
-                },
-                searchResults() {
-                    if (this.searchName != '') {
-                        return this.users.filter(el => el.match(this.searchName))
-                    } else {
-                        return '';
-                    }
-                },
-                searchTextClass() {
-                    if (this.searchName != '') {
-                    return 'searchTitleBold';
-                    } else {
-                    return 'searchTitleNormal';
-                    }
-                },
-            },
-        });
-    </script>
+    <!-- Vue Code -->
+    <script src='app.vue' type="text/javascript"></script>
 </body>
